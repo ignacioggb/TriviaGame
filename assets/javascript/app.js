@@ -20,6 +20,7 @@ $( document ).ready(function() {
 //----------------FUNCTIONS--------------//
 //-START
 function start(){
+    time=10;
     $("#startbutton").remove();
     $("h1").css("margin-bottom", "0vh");
     $("#TimeDisplay").html("<h3>Remaining time: "+time+" Seconds</h3>");
@@ -39,16 +40,15 @@ function Ans(){
     }
 //-Count
 function count() {
-    console.log("Time: "+time);
-    console.log("index: "+index);
     game(index);
-    time--;
     $("#TimeDisplay").html("<h3>"+"Remaining time: "+time+" Seconds</h3>");
-        if(time==0){
-        Reveal();
+    time--;
+        if(time==-1){
+        Reveal(false);
     }   } 
 //--Game
 function game(index){
+    $("#my_image").css("display", "none");
     $(".Ans").css("display", "block");
     $("#Question").css("display", "block");
     $("h2").css("display", "none");
@@ -59,43 +59,49 @@ function game(index){
     }
 //--Reveal
 function Reveal(ok){
-    
     $(".Ans").css("display", "none");
     $("#Question").css("display", "none");
-
     var ptext = $("<h2>");
-    var ptext2 = $("<h2>");
-
     if(ok==true){
         ptext.text("Correct!!");
         ptext.appendTo(".n2"); 
     }
     else {
-        ptext.text("Nope!");
+        ptext.text("Nope! correct answer is: "+Questions[index].C);
         ptext.appendTo(".n2");
-        ptext2.text("correct answer is: "+Questions[index].C);
-        ptext2.appendTo(".n3");
     }
+    $("#my_image").css("display", "block");
+    $("#my_image").attr("src","assets/images/giphy"+index+".gif");
     index++;
-  
-    if(index==7){
-    setTimeout(final, 2000);
-    }
-
-else{
-    if (!clockRunning) {
-        time=12;
-        intervalId = setInterval(count, 1000);
-        clockRunning = true;
-        }
-    setTimeout(count, 2000);
-    }
+    if(index<7){
+        clearInterval(intervalId);
+        clockRunning = false;
+        setTimeout(start, 4000);}
+    else{
+        clearInterval(intervalId);
+        clockRunning = false;
+        setTimeout(final, 4000);    
+   }
     }
 
     function final(){
-        $(".n2").html("<h2>Correct answers: "+rights+"</h2>");
-        $(".n3").html("<h2>Wrong answers: "+wrongs+"</h2>");
-        $(".n4").html("<h2>Start Again?</h2>");
-        $(".n5").css("display", "none");
+        $("#my_image").css("display", "none");
+        $("h2").css("display", "none");
+        $(".txt").css("display", "block");
+        $(".txt").css("margin", "auto");
+        $(".txt2").html("<h2>Correct answers: "+rights+"</h2>");
+        $(".txt3").html("<h2>Correct answers: "+wrongs+"</h2>");
+        $(".txt4").html("<h2>Unanswered: "+(7-rights-wrongs)+"</h2>");
+        $(".txt5").html("<h2>Start Again?</h2>");0
+        $(".txt6").html("");
+
+        $(".txt5").on("click", function(){
+            $(".txt").css("display", "none");
+            time=10;
+            index=0;
+            wrongs=0;
+            rights=0;
+            start();
+        });
     }
 
