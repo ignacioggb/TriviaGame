@@ -7,11 +7,7 @@ var Question6={Q:"Which planet is nearest the sun?",A:["Mercury","Mars","Uranus"
 var Question7={Q:"What colours make purple?",A:["Yellow and Red","Blue and Orange","Red and Blue"],C:"Red and Blue"};
 var Questions=[Question1,Question2,Question3,Question4,Question5,Question6,Question7];
 var clockRunning = false;
-var time=10;
-var index=0;
-var intervalId;
-var rights=0;
-var wrongs=0;
+var time=10; var index=0; var intervalId; var rights=0; var wrongs=0;
 //--------------MAIN-----------------//
 $( document ).ready(function() {
     $(".btn").on("click", start);
@@ -33,10 +29,9 @@ function start(){
 function Ans(){
     clearInterval(intervalId);
     clockRunning = false;
-    console.log(this.textContent+"/"+Questions[index].C)
     if (this.textContent==Questions[index].C)
-    {rights++;console.log("buenas "+rights);Reveal(true);}
-    else{wrongs++;console.log("malas "+wrongs);Reveal(false);}
+    {rights++;Reveal(true);}
+    else{wrongs++;Reveal(false);}
     }
 //-Count
 function count() {
@@ -83,14 +78,14 @@ function Reveal(ok){
         setTimeout(final, 4000);    
    }
     }
-
+//----Game End and Reset    
     function final(){
         $("#my_image").css("display", "none");
         $("h2").css("display", "none");
         $(".txt").css("display", "block");
         $(".txt").css("margin", "auto");
         $(".txt2").html("<h2>Correct answers: "+rights+"</h2>");
-        $(".txt3").html("<h2>Correct answers: "+wrongs+"</h2>");
+        $(".txt3").html("<h2>Wrong answers: "+wrongs+"</h2>");
         $(".txt4").html("<h2>Unanswered: "+(7-rights-wrongs)+"</h2>");
         $(".txt5").html("<h2>Start Again?</h2>");0
         $(".txt6").html("");
