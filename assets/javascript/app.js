@@ -78,7 +78,7 @@ function Reveal(ok){
         setTimeout(final, 4000);    
    }
     }
-//----Game End and Reset    
+//----final screen and Reset    
     function final(){
         $("#my_image").css("display", "none");
         $("h2").css("display", "none");
