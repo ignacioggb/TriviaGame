@@ -2,7 +2,7 @@ body{
     background-image: url("https://eventage-images-dgxbmy4th.netdna-ssl.com/wp-content/uploads/2018/06/Question-Mark-Background-01.jpg");
     padding:3%;
 }
-#pause{display:none;}
+#play{display:none;}
 
 .fas{ background-color: #45a3e5;
 padding:10px;

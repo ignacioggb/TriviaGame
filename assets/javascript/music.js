@@ -7,11 +7,11 @@ else{
 }
 
    
-   
+
    
    var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'assets/images/kahoot.mp3');
-
+    audioElement.loop=true;
 
         audioElement.play();
     
